@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node --check controllers/authController.js)",
+      "Bash(node --check controllers/recipeController.js)",
+      "Bash(node --check controllers/ingredientController.js)"
+    ]
+  }
+}
