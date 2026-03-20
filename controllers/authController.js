@@ -2,7 +2,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const db = require('../db');
 
-// Helper — generates a signed JWT for the given user payload
 const generateToken = (user) => {
   return jwt.sign(
     { id: user.id, username: user.username, email: user.email },
@@ -11,8 +10,6 @@ const generateToken = (user) => {
   );
 };
 
-// POST /api/auth/register
-// Creates a new user account with a bcrypt-hashed password
 const register = async (req, res) => {
   const { username, email, password } = req.body;
 
@@ -21,13 +18,11 @@ const register = async (req, res) => {
   }
 
   try {
-    // Prevent duplicate accounts
     const existing = await db.query('SELECT id FROM users WHERE email = $1', [email]);
     if (existing.rows.length > 0) {
       return res.status(409).json({ error: 'Email is already registered.' });
     }
 
-    // Hash password — never store plain text
     const salt = await bcrypt.genSalt(10);
     const password_hash = await bcrypt.hash(password, salt);
 
@@ -41,13 +36,10 @@ const register = async (req, res) => {
 
     return res.status(201).json({ message: 'User registered successfully.', token, user: newUser });
   } catch (err) {
-    console.error('Register error:', err.message);
     return res.status(500).json({ error: 'Server error during registration.' });
   }
 };
 
-// POST /api/auth/login
-// Validates credentials and returns a JWT token
 const login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -64,7 +56,6 @@ const login = async (req, res) => {
 
     const user = result.rows[0];
 
-    // Compare submitted password against the stored bcrypt hash
     const isMatch = await bcrypt.compare(password, user.password_hash);
     if (!isMatch) {
       return res.status(401).json({ error: 'Invalid email or password.' });
@@ -72,14 +63,12 @@ const login = async (req, res) => {
 
     const token = generateToken(user);
 
-    // Return user data without exposing the password hash
     return res.status(200).json({
       message: 'Login successful.',
       token,
       user: { id: user.id, username: user.username, email: user.email, created_at: user.created_at },
     });
   } catch (err) {
-    console.error('Login error:', err.message);
     return res.status(500).json({ error: 'Server error during login.' });
   }
 };

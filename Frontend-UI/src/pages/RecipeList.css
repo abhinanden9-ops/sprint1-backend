@@ -1,0 +1,75 @@
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.recipe-card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  background: white;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.recipe-card .card-body {
+  padding: 25px;
+}
+
+.recipe-card .card-title {
+  color: #2c3e50;
+  font-weight: 700;
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+}
+
+.recipe-card .card-text {
+  color: #7f8c8d;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.recipe-card:hover {
+  box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
+  transform: translateY(-8px);
+}
+
+.btn-group {
+  gap: 8px;
+  margin-top: 15px;
+  display: flex;
+}
+
+.btn-group .btn {
+  flex: 1;
+  font-weight: 600;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%) !important;
+}
+
+.btn-danger:hover {
+  transform: translateY(-2px);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #4ecdc4 0%, #44a9a6 100%) !important;
+  color: white !important;
+  font-weight: 600;
+}
