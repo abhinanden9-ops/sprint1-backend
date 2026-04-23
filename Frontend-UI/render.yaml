@@ -8,6 +8,6 @@ services:
     startCommand: npx serve -s build
     envVars:
       - key: REACT_APP_API_URL
-        value: https://sprint1-backend-u1ka.onrender.com/api
+        value: https://sprint1-backend-u1ka.onrender.com
       - key: REACT_APP_ENV
         value: production
