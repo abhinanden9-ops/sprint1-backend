@@ -5,12 +5,13 @@ import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import RecipeList from './pages/RecipeList';
 import RecipeDetail from './pages/RecipeDetail';
+import Profile from './pages/Profile';
 import NotFound from './pages/NotFound';
 import './App.css';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
-  const [user, setUser] = useState(
+  const [user, setUser]   = useState(
     localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null
   );
 
@@ -28,16 +29,23 @@ function App() {
     localStorage.removeItem('user');
   };
 
+  const handleProfileUpdate = (updatedUser) => {
+    const merged = { ...user, ...updatedUser };
+    setUser(merged);
+    localStorage.setItem('user', JSON.stringify(merged));
+  };
+
   return (
     <Router>
       <div className="App">
         {token && <Navigation user={user} onLogout={handleLogout} />}
         <Routes>
-          <Route path="/login"    element={token ? <Navigate to="/" /> : <Login onLogin={handleLogin} />} />
-          <Route path="/register" element={token ? <Navigate to="/" /> : <Register onLogin={handleLogin} />} />
-          <Route path="/"         element={token ? <RecipeList /> : <Navigate to="/login" />} />
+          <Route path="/login"       element={token ? <Navigate to="/" /> : <Login onLogin={handleLogin} />} />
+          <Route path="/register"    element={token ? <Navigate to="/" /> : <Register onLogin={handleLogin} />} />
+          <Route path="/"            element={token ? <RecipeList /> : <Navigate to="/login" />} />
           <Route path="/recipes/:id" element={token ? <RecipeDetail /> : <Navigate to="/login" />} />
-          <Route path="*"         element={<NotFound />} />
+          <Route path="/profile"     element={token ? <Profile user={user} onProfileUpdate={handleProfileUpdate} /> : <Navigate to="/login" />} />
+          <Route path="*"            element={<NotFound />} />
         </Routes>
       </div>
     </Router>
