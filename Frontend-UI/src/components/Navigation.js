@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './Navigation.css';
 
 function Navigation({ user, onLogout }) {
@@ -10,16 +10,20 @@ function Navigation({ user, onLogout }) {
     navigate('/login');
   };
 
+  const initials = user?.username ? user.username.charAt(0).toUpperCase() : '?';
+
   return (
     <nav className="qc-nav">
-      <div className="qc-nav__brand">
+      <Link to="/" className="qc-nav__brand">
         <div className="qc-nav__logo">🍳</div>
         <span className="qc-nav__name">QuickCook</span>
-      </div>
+      </Link>
+
       <div className="qc-nav__right">
-        <span className="qc-nav__user">
-          Hey, <span>{user?.username}</span>
-        </span>
+        <Link to="/profile" className="qc-nav__profile-btn">
+          <div className="qc-nav__avatar">{initials}</div>
+          <span className="qc-nav__username">{user?.username}</span>
+        </Link>
         <button className="btn btn-outline-light qc-nav__logout" onClick={handleLogout}>
           Logout
         </button>
