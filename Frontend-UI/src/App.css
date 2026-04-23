@@ -1,60 +1,83 @@
-:root {
-  --primary-color: #ff6b6b;
-  --secondary-color: #4ecdc4;
-  --dark-color: #2c3e50;
-  --light-color: #ecf0f1;
-  --text-color: #34495e;
-}
-
 .App {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-}
-
-.App-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 20px;
-  color: white;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background-color: var(--bg);
 }
 
 .App-main {
   flex: 1;
-  padding: 40px 20px;
+  padding: 40px 20px 60px;
 }
 
-.auth-container {
-  max-width: 500px;
-  margin: 60px auto;
-  padding: 40px;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-  animation: slideIn 0.4s ease-out;
+/* ── Auth pages ──────────────────────────────── */
+.auth-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #1C1C2E 0%, #2D2D44 60%, #FF6535 200%);
+  padding: 24px;
 }
 
-.recipe-card {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 12px;
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
   overflow: hidden;
-  background: white;
-  border: none;
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.recipe-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+.auth-header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  padding: 36px 40px 28px;
+  text-align: center;
+  color: #fff;
 }
 
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.auth-header .brand {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+}
+
+.auth-header .subtitle {
+  font-size: 0.875rem;
+  opacity: 0.85;
+  font-weight: 400;
+}
+
+.auth-body {
+  padding: 36px 40px 40px;
+}
+
+.auth-body h2 {
+  font-size: 1.4rem;
+  margin-bottom: 24px;
+  color: var(--text-dark);
+}
+
+.auth-footer {
+  padding: 0 40px 32px;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--text-mid);
+}
+
+.auth-footer a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
