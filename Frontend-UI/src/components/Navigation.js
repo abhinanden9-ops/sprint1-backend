@@ -11,22 +11,18 @@ function Navigation({ user, onLogout }) {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-      <div className="container-fluid">
-        <span className="navbar-brand">🍳 QuickCook</span>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-          <span className="navbar-toggler-icon"></span>
+    <nav className="qc-nav">
+      <div className="qc-nav__brand">
+        <div className="qc-nav__logo">🍳</div>
+        <span className="qc-nav__name">QuickCook</span>
+      </div>
+      <div className="qc-nav__right">
+        <span className="qc-nav__user">
+          Hey, <span>{user?.username}</span>
+        </span>
+        <button className="btn btn-outline-light qc-nav__logout" onClick={handleLogout}>
+          Logout
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ms-auto align-items-center">
-            <li className="nav-item">
-              <span className="nav-link">👤 {user?.username}</span>
-            </li>
-            <li className="nav-item">
-              <button className="btn btn-outline-danger" onClick={handleLogout}>Logout</button>
-            </li>
-          </ul>
-        </div>
       </div>
     </nav>
   );
